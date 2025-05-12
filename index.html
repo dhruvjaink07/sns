@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Service</title>
+  <script>
+    // Connect to WebSocket server
+    var ws = new WebSocket("ws://192.168.186.114:8080/ws");
+
+    ws.onmessage = function(event) {
+      const timestamp = new Date().toLocaleString(); // Get the current timestamp
+      const message = `[${timestamp}] New Notification: ${event.data}`;
+
+      // Log the message to the console
+      console.log(message);
+
+      // Display the message on the page
+      const notificationList = document.getElementById("notifications");
+      const notificationItem = document.createElement("li");
+      notificationItem.textContent = message;
+      notificationList.appendChild(notificationItem);
+
+      // Show the message in an alert box
+      // alert(message);
+    };
+
+    ws.onopen = function() {
+      console.log("Connected to the WebSocket server.");
+    };
+
+    ws.onclose = function() {
+      console.log("Disconnected from the WebSocket server.");
+    };
+
+    ws.onerror = function(err) {
+      console.log("WebSocket Error: ", err);
+    };
+  </script>
+</head>
+<body>
+  <h1>WebSocket Notification Service</h1>
+  <p>Client is waiting for notifications...</p>
+  <ul id="notifications">
+    <!-- Notifications will be appended here -->
+  </ul>
+</body>
+</html>
