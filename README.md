@@ -25,7 +25,3 @@ The Notification Service is a Go-based web application that provides real-time n
 3. Run the application:
    ```bash
    go run main.go
-
-## Demo
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
